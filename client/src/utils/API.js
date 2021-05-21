@@ -19,7 +19,7 @@ export default {
   }, 
 
   search: function(query) {
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&callback=handleResponse`)
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=AIzaSyDDerweIJI0pPaC1RegzNhPrIhuAONym0o&`)
   }
 };
 

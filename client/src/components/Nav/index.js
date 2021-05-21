@@ -7,7 +7,7 @@ function Nav() {
         React Reading List
       </a>
      
-      <button> Search Page</button>
+     <a href="/search"> <button> Search Page</button> </a>
     </nav>
   );
 }

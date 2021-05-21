@@ -7,7 +7,7 @@ import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 
 function Books() {
   // Setting our component's initial state
@@ -20,7 +20,7 @@ function Books() {
   }, [])
 
   // Loads all books and sets them to books
-  function loadBooks() {
+  const loadBooks= () =>  {
     API.getBooks()
       .then(res => 
         setBooks(res.data)
@@ -30,21 +30,11 @@ function Books() {
 
 
     return (
-      <Router>
+     
 
-      
+    
       <Container fluid>
-        <Switch>
-          <Route exact path="/">
-            <Books />
-          </Route>
-          <Route exact path="/search">
-            <Search />
-          </Route>
-          <Route exact path="/save">
-            <Save />
-          </Route>
-        </Switch>
+          
         <Row>
           <Col size="md-6">
             <Jumbotron>
@@ -66,12 +56,12 @@ function Books() {
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
               />
-              <FormBtn
+               <FormBtn
                 disabled={!(formObject.author && formObject.title)}
                 onClick={() => {}}
               >
                 Submit Book
-              </FormBtn>
+              </FormBtn> 
             </form>
           </Col>
           <Col size="md-6 sm-12">
@@ -99,7 +89,9 @@ function Books() {
           </Col>
         </Row>
       </Container>
-    </Router>
+    
+    
+    
     );
   }
 

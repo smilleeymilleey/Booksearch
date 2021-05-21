@@ -7,22 +7,25 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 
+
 function Search() {
   // Setting our component's initial state
  
 //   const [formObject, setFormObject] = useState({})
 
   const [query, setQuery] = useState("")
+  const [books, setBooks] = useState([])
 
   // Load all books and store them with setBooks
   
   // Loads all books and sets them to books
-  function searchGoogleBooks() {
+  const searchGoogleBooks = () => {
     API.search(query)
-    .then(res => {console.log(res)})
-  
+    .then(res => {
+      setBooks(res.data.items)
+      console.log(res)
+    })
   };
-
 
     return (
       <Container fluid>
@@ -42,7 +45,8 @@ function Search() {
               />
               <FormBtn
                
-                onClick={() => {
+                onClick={(e) => {
+                e.preventDefault()
                     searchGoogleBooks()
                 }}
               >
@@ -54,28 +58,27 @@ function Search() {
             <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron>
-            {/* {books.length ? ( */}
+             { books.length > 0 ? ( 
               <List>
-               
-                  return (
+                {books.map(book =>
                     <ListItem >
                       <a href={""}>
                         <strong>
-                          {} by {}
+                          {book.volumeInfo.title} by {book.volumeInfo.authors.map(author => <p>{author}</p>)}
                         </strong>
                       </a>
                       <DeleteBtn onClick={() =>{}} />
-                    </ListItem>
-                  );
-                })
+                    </ListItem>    
+                )}
               </List>
-             : (
+                
+             ) : (
               <h3>No Results to Display</h3>
-            )
+            )}
           </Col>
         </Row>
       </Container>
-    );
-  }
+);
+             }
 
   export default Search;
